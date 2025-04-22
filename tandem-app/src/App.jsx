@@ -21,7 +21,7 @@ function App() {
             <div className="flex justify-between h-16">
               <div className="flex">
                 <div className="flex-shrink-0 flex items-center">
-                  <img src={tandemLogo} alt="Tandem" className="h-8" />
+                  <img src={tandemLogo} alt="Tandem" className="h-6" />
                 </div>
                 {isLoggedIn && (
                   <nav className="ml-6 flex space-x-8">
