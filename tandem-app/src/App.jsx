@@ -6,8 +6,7 @@ import './App.css'
 import MatchingPage from './pages/matching/MatchingPage'
 import MessagingPage from './pages/messaging/MessagingPage'
 import ProfilePage from './pages/profile/ProfilePage'
-// Other pages will be imported as they are created
-// import CommunityPage from './pages/community/CommunityPage'
+import CommunityPage from './pages/community/CommunityPage'
 
 function App() {
   // This will be replaced with proper auth context later
@@ -83,12 +82,16 @@ function App() {
             } />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/profile/edit" element={<ProfilePage mode="edit" />} />
+            <Route path="/profile/skills" element={<ProfilePage mode="skills" />} />
+            <Route path="/profile/interests" element={<ProfilePage mode="interests" />} />
             <Route path="/profile/:userId" element={<ProfilePage />} />
             <Route path="/matches" element={<MatchingPage />} />
             <Route path="/matches/:matchId" element={<MatchingPage />} />
             <Route path="/messages" element={<MessagingPage />} />
             <Route path="/messages/:conversationId" element={<MessagingPage />} />
-            <Route path="/community" element={<div className="py-12 px-6 bg-white rounded-xl shadow-md">Community Page (Coming Soon)</div>} />
+            <Route path="/community" element={<CommunityPage />} />
+            <Route path="/community/create" element={<CommunityPage mode="create" />} />
+            <Route path="/community/:activityId" element={<CommunityPage />} />
           </Routes>
         </main>
 

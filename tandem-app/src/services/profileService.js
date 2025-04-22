@@ -40,18 +40,44 @@ export function updateUserProfile(updateData) {
 }
 
 /**
- * Add a skill to the current user's profile
- * @param {Object} skill - The skill to add
- * @returns {Object} - Updated user profile
+ * Get user skills
+ * @param {string} userId - The user ID
+ * @returns {Array} - List of user skills
  */
-export function addUserSkill(skill) {
+export function getUserSkills(userId) {
+  // For demo purposes, if this is the current user, return their skills
+  // Otherwise, find the user in the mock data
+  if (userId === currentUser.id) {
+    return [...currentUser.skills];
+  }
+  
+  const user = mockUsers.find(user => user.id === userId);
+  return user ? [...user.skills] : [];
+}
+
+/**
+ * Add a skill to a user's profile
+ * @param {string} userId - The user ID
+ * @param {Object} skill - The skill to add
+ * @returns {Object} - Added skill with generated ID
+ */
+export function addUserSkill(userId, skill) {
+  // Only allow adding skills to current user for demo
+  if (userId !== currentUser.id) {
+    throw new Error('Cannot add skills to other users');
+  }
+  
   // Validate skill object
   if (!skill.category || !skill.specific || !skill.proficiency) {
     throw new Error('Invalid skill object. Required fields: category, specific, proficiency');
   }
   
+  // Generate a unique ID for the skill
+  const skillId = `skill-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  
   // Add default values if not provided
   const newSkill = {
+    id: skillId,
     availability: 'Flexible',
     description: '',
     ...skill
@@ -60,63 +86,146 @@ export function addUserSkill(skill) {
   // Add the skill
   currentUser.skills.push(newSkill);
   
-  return { ...currentUser };
+  return newSkill;
 }
 
 /**
- * Remove a skill from the current user's profile
- * @param {string} skillSpecific - The specific skill name to remove
+ * Update a user's skill
+ * @param {string} userId - The user ID
+ * @param {Object} updatedSkill - The updated skill object
+ * @returns {Object} - Updated skill
+ */
+export function updateUserSkill(userId, updatedSkill) {
+  // Only allow updating skills of current user for demo
+  if (userId !== currentUser.id) {
+    throw new Error('Cannot update skills of other users');
+  }
+  
+  // Validate skill object
+  if (!updatedSkill.category || !updatedSkill.specific || !updatedSkill.proficiency) {
+    throw new Error('Invalid skill object. Required fields: category, specific, proficiency');
+  }
+  
+  // Find the skill index
+  const skillIndex = currentUser.skills.findIndex(
+    skill => skill.id === updatedSkill.id
+  );
+  
+  if (skillIndex === -1) {
+    throw new Error(`Skill with ID "${updatedSkill.id}" not found`);
+  }
+  
+  // Update the skill
+  currentUser.skills[skillIndex] = {
+    ...currentUser.skills[skillIndex],
+    ...updatedSkill
+  };
+  
+  return currentUser.skills[skillIndex];
+}
+
+/**
+ * Remove a skill from a user's profile
+ * @param {string} userId - The user ID
+ * @param {string} skillId - The ID of the skill to remove
  * @returns {Object} - Updated user profile
  */
-export function removeUserSkill(skillSpecific) {
+export function removeUserSkill(userId, skillToRemove) {
+  // Only allow removing skills from current user for demo
+  if (userId !== currentUser.id) {
+    throw new Error('Cannot remove skills from other users');
+  }
+  
   const initialLength = currentUser.skills.length;
   
   // Filter out the skill to remove
   currentUser.skills = currentUser.skills.filter(
-    skill => skill.specific.toLowerCase() !== skillSpecific.toLowerCase()
+    skill => skill.id !== skillToRemove.id
   );
   
   // Check if a skill was actually removed
   if (currentUser.skills.length === initialLength) {
-    throw new Error(`Skill "${skillSpecific}" not found`);
+    throw new Error(`Skill with ID "${skillToRemove.id}" not found`);
   }
   
   return { ...currentUser };
 }
 
 /**
- * Add an interest to the current user's profile
- * @param {string} interest - The interest to add
- * @returns {Object} - Updated user profile
+ * Get user interests
+ * @param {string} userId - The user ID
+ * @returns {Array} - List of user interests
  */
-export function addUserInterest(interest) {
-  // Check if the interest already exists
-  if (currentUser.interests.some(i => i.toLowerCase() === interest.toLowerCase())) {
-    throw new Error(`Interest "${interest}" already exists`);
+export function getUserInterests(userId) {
+  // For demo purposes, if this is the current user, return their interests
+  // Otherwise, find the user in the mock data
+  if (userId === currentUser.id) {
+    return [...currentUser.interests];
   }
+  
+  const user = mockUsers.find(user => user.id === userId);
+  return user ? [...user.interests] : [];
+}
+
+/**
+ * Add an interest to a user's profile
+ * @param {string} userId - The user ID
+ * @param {Object} interest - The interest to add (with name and category)
+ * @returns {Object} - Added interest with generated ID
+ */
+export function addUserInterest(userId, interest) {
+  // Only allow adding interests to current user for demo
+  if (userId !== currentUser.id) {
+    throw new Error('Cannot add interests to other users');
+  }
+  
+  // Validate interest object
+  if (!interest.name || !interest.category) {
+    throw new Error('Invalid interest object. Required fields: name, category');
+  }
+  
+  // Check if the interest already exists
+  if (currentUser.interests.some(i => i.name.toLowerCase() === interest.name.toLowerCase())) {
+    throw new Error(`Interest "${interest.name}" already exists`);
+  }
+  
+  // Generate a unique ID for the interest
+  const interestId = `interest-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  
+  // Create the interest object
+  const newInterest = {
+    id: interestId,
+    ...interest
+  };
   
   // Add the interest
-  currentUser.interests.push(interest);
+  currentUser.interests.push(newInterest);
   
-  return { ...currentUser };
+  return newInterest;
 }
 
 /**
- * Remove an interest from the current user's profile
- * @param {string} interest - The interest to remove
+ * Remove an interest from a user's profile
+ * @param {string} userId - The user ID
+ * @param {string} interestId - The ID of the interest to remove
  * @returns {Object} - Updated user profile
  */
-export function removeUserInterest(interest) {
+export function removeUserInterest(userId, interestId) {
+  // Only allow removing interests from current user for demo
+  if (userId !== currentUser.id) {
+    throw new Error('Cannot remove interests from other users');
+  }
+  
   const initialLength = currentUser.interests.length;
   
   // Filter out the interest to remove
   currentUser.interests = currentUser.interests.filter(
-    i => i.toLowerCase() !== interest.toLowerCase()
+    interest => interest.id !== interestId
   );
   
   // Check if an interest was actually removed
   if (currentUser.interests.length === initialLength) {
-    throw new Error(`Interest "${interest}" not found`);
+    throw new Error(`Interest with ID "${interestId}" not found`);
   }
   
   return { ...currentUser };
