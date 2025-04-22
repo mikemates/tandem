@@ -169,7 +169,7 @@ const InterestManager = ({ userId }) => {
         
         <div className="flex flex-wrap gap-2">
           <button
-            key="all"
+            key="all-category"
             onClick={() => setSelectedCategory('all')}
             className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
               selectedCategory === 'all'
