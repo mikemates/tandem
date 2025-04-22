@@ -1,224 +1,225 @@
 # Tandem - Technical Context
 
+This document outlines the technical stack, tools, constraints, and implementation details for the Tandem virtual community platform.
+
 ## Technology Stack
 
-### Frontend Technologies
+### Frontend
+- **Framework**: React 18 with Vite
+- **Routing**: React Router v6
+- **Styling**: Tailwind CSS v3.3.5
+- **State Management**: React Hooks (useState, useEffect, useContext)
+- **Build Tools**: Vite, PostCSS
 
-#### Core Framework
-- **React**: UI library for building component-based interfaces
-- **Vite**: Build tool and development server with fast HMR (Hot Module Replacement)
-- **TypeScript**: (Optional) Static typing for improved code quality and developer experience
+### Development Environment
+- **Version Control**: Git with GitHub
+- **Code Editor**: VS Code
+- **Package Manager**: npm
+- **Linting**: ESLint
+- **Formatting**: Prettier
 
-#### Styling
-- **Tailwind CSS**: Utility-first CSS framework for rapid UI development
-- **PostCSS**: Tool for transforming CSS with JavaScript plugins
-- **CSS Modules**: (Alternative) For component-scoped styling
+### Storage (POC)
+- **Data Persistence**: localStorage
+- **Mock Services**: JavaScript modules simulating API calls
 
-#### Routing
-- **React Router v6**: Client-side routing library for React applications
+### Planned Backend (Post-POC)
+- **API**: REST or GraphQL
+- **Database**: MongoDB or PostgreSQL
+- **Authentication**: JWT or OAuth
+- **Real-time**: WebSockets
 
-#### State Management
-- **React Context API**: Built-in React context for global state
-- **React Hooks**: useState, useReducer, useContext, useMemo, useCallback
-- **Custom Hooks**: For encapsulating reusable logic
+## Implementation Details
 
-#### Forms & Validation
-- **React Hook Form**: Form handling with minimal re-renders
-- **Zod** or **Yup**: Schema validation libraries
+### Component Architecture
 
-#### Data Handling
-- **localStorage API**: Browser storage for persisting data in the POC
-- **fetch API**: For HTTP requests (future implementation)
+The application follows a structured component hierarchy:
 
-#### UI Components (Optional)
-- **Headless UI**: Unstyled accessible components
-- **Radix UI**: Unstyled accessible components
-- **React Icons**: Icon library
-
-#### Map Integration
-- **Leaflet.js**: Open-source JavaScript library for mobile-friendly interactive maps
-- **React-Leaflet**: React components for Leaflet maps
-
-### Development Tools
-
-#### Package Management
-- **npm** or **yarn**: Package managers for JavaScript
-
-#### Code Quality
-- **ESLint**: Static code analysis for identifying problematic patterns
-- **Prettier**: Code formatter for consistent style
-
-#### Version Control
-- **Git**: Distributed version control system
-- **GitHub**: Hosting service for Git repositories
-
-#### Testing (Future Implementation)
-- **Vitest**: Unit testing framework
-- **React Testing Library**: Testing utilities for React components
-- **Cypress**: End-to-end testing framework
-
-## Development Environment
-
-### Local Setup
-```bash
-# Clone the repository
-git clone https://github.com/your-org/tandem.git
-
-# Navigate to project directory
-cd tandem
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
+```
+src/
+├── assets/         # Static assets
+├── components/     # Reusable UI components
+│   ├── common/     # Shared components
+│   ├── profile/    # Profile components
+│   ├── matching/   # Matching components
+│   ├── messaging/  # Messaging components
+│   └── community/  # Community components (planned)
+├── pages/          # Page components that use smaller components
+├── services/       # Data services and API abstraction
+├── utils/          # Utility functions
+├── context/        # React context providers
+└── hooks/          # Custom React hooks
 ```
 
-### Project Structure
-```
-tandem/
-├── public/              # Static assets
-│   ├── mock-data/       # Mock images and data files
-│   └── favicon.ico      # Site favicon
-├── src/                 # Source code
-│   ├── assets/          # Application assets
-│   ├── components/      # UI components
-│   │   ├── common/      # Shared components
-│   │   ├── profile/     # Profile components
-│   │   ├── matching/    # Matching components
-│   │   ├── messaging/   # Messaging components
-│   │   └── community/   # Community components
-│   ├── context/         # React context providers
-│   ├── hooks/           # Custom React hooks
-│   ├── pages/           # Page components
-│   ├── services/        # Service modules
-│   ├── utils/           # Utility functions
-│   ├── App.jsx          # Main application component
-│   ├── main.jsx         # Entry point
-│   └── index.css        # Global styles
-├── .eslintrc.js         # ESLint configuration
-├── .prettierrc          # Prettier configuration
-├── index.html           # HTML template
-├── package.json         # Package manifest
-├── tailwind.config.js   # Tailwind CSS configuration
-└── vite.config.js       # Vite configuration
-```
+### Responsive Design Strategy
 
-## Technical Constraints
+The application is built with a mobile-first approach using Tailwind CSS's responsive utilities:
 
-### POC Limitations
-- **No Backend**: The POC will use client-side storage only, limiting persistence and multi-user functionality
-- **Simulated Authentication**: Authentication will be simulated with localStorage
-- **Static Location Data**: Geographic features will use fixed coordinates rather than real geolocation
-- **Limited Scale**: The system is not designed to handle large data volumes
-- **Mock Images**: Using placeholder images for profiles and activities
-- **No Real-time Updates**: Messages and activities won't update in real-time
-- **Browser Compatibility**: Targeting modern browsers only for the POC
+- Base styles target mobile devices
+- Media queries expand layouts for larger screens
+- Conditional rendering for different screen sizes
+- Flexible grids and layouts
 
-### Technical Debt Considerations
-- **Data Persistence**: Will need proper backend implementation
-- **Authentication**: Will need secure authentication system
-- **Geolocation**: Will need proper geolocation services
-- **Real-time Features**: Will need WebSockets or similar
-- **Image Handling**: Will need image upload, storage, and CDN
-- **Performance Optimization**: Will need optimization for scale
-- **Accessibility**: Will need full accessibility audit and implementation
+### Data Flow Pattern
 
-## Development Standards
+1. **Service Layer**:
+   - ProfileService: Manages user profile data
+   - MatchingService: Handles match algorithms and data
+   - MessagingService: Manages conversations and messages
 
-### Code Style
-- Consistent naming conventions (camelCase for variables, PascalCase for components)
-- Clean, well-documented code with comments where necessary
-- Component-based architecture with separation of concerns
-- Proper error handling and user feedback
+2. **Component Data Flow**:
+   ```
+   Services <--> Page Components <--> UI Components
+   ```
 
-### Component Guidelines
-- Small, focused components with single responsibilities
-- Clear prop interfaces
-- Consistent patterns for handling loading, errors, and empty states
-- Responsive design considerations throughout
+3. **State Management**:
+   - Component-level state for UI interactions
+   - Service layer for data operations
+   - No global state management library (Redux, etc.) needed for POC
 
-### State Management
-- Context providers for global state
-- Component-level state for UI-specific concerns
-- Careful prop drilling avoidance
-- Performance considerations for re-renders
+## Technical Decisions
 
-### Styling Approach
-- Tailwind utility classes for rapid development
-- Consistent color scheme and spacing
-- Mobile-first responsive design
-- Accessible UI components with appropriate contrast ratios
+### Technology Choices
+
+| Technology | Justification | Alternatives Considered |
+|------------|--------------|-------------------------|
+| React + Vite | Fast development experience, HMR, modern features | Next.js, Create React App |
+| Tailwind CSS | Rapid styling with utility classes, minimal CSS | Styled Components, CSS Modules |
+| React Router | Industry standard, declarative routing | Custom routing, Reach Router |
+| localStorage | Simple client-side storage without backend | IndexedDB, sessionStorage |
+| React Hooks | Clean component code, built-in to React | Class components, Redux |
+
+### Technical Trade-offs
+
+1. **Tailwind CSS v3.3.5 vs. v4**
+   - Chose v3.3.5 for stability
+   - v4 had compatibility issues with current setup
+   - Trade-off: Missed newer features but gained reliability
+
+2. **Mock Services vs. Backend**
+   - Implemented mock services using JavaScript modules
+   - Trade-off: Faster development but less realistic data interactions
+
+3. **Component State vs. Global State**
+   - Used component-level state with prop passing
+   - Trade-off: Simpler setup but potentially more prop drilling
+
+4. **Service Pattern vs. Context API**
+   - Implemented service modules instead of React Context for data
+   - Trade-off: Better separation of concerns but slightly more verbose imports
+
+## Implementation Progress
+
+### Complete Features
+- Profile system (service, view, edit components)
+- Matching system (algorithm, cards, filtering)
+- Messaging system (conversations, threads, composition)
+- Responsive UI components (layouts, navigation)
+
+### In Progress
+- Community discovery system (planned next)
+
+### Technical Debt
+
+1. **Styling Consistency**
+   - Some inconsistent styling patterns
+   - Need to extract common styles to shared classes
+
+2. **Form Validation**
+   - Basic validation implemented
+   - Need more comprehensive validation and feedback
+
+3. **Error Handling**
+   - Simple error states implemented
+   - Need more robust error boundaries and user feedback
+
+4. **Testing**
+   - Limited manual testing
+   - No automated tests yet
+
+## Browser & Device Support
+
+### Target Browsers
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+### Target Devices
+- Desktop (1024px+)
+- Tablet (768px - 1023px)
+- Mobile (320px - 767px)
 
 ## Performance Considerations
 
-### Initial Load Performance
-- Code splitting for route-based chunking
-- Lazy loading of components not needed on initial render
-- Image optimization for faster page loads
-- Minimal dependencies to reduce bundle size
+1. **Rendering Optimization**
+   - Minimized unnecessary re-renders
+   - Used React.memo for pure components
+   - Keys for efficient list rendering
 
-### Runtime Performance
-- Virtual list rendering for long lists
-- Memoization for expensive calculations
-- useCallback for stable function references
-- useMemo for derived data
+2. **Asset Optimization**
+   - SVG for icons where possible
+   - Optimized image loading
 
-### Mobile Considerations
-- Touch-friendly UI with appropriate tap targets
-- Reduced data usage where possible
-- Responsive layout adaptations for small screens
-- Performance optimizations for mobile devices
+3. **Code Splitting Opportunities**
+   - Route-based code splitting potential
+   - Dynamic imports for large components
 
-## Security Considerations
+## Security Considerations (for future implementation)
 
-### Client-Side Security (POC)
-- Input validation for all user inputs
-- Data sanitization before display
-- Content security policy considerations
-- Safe localStorage usage for temporary data
+1. **Data Security**
+   - Currently using client-side storage
+   - Plan for proper authentication and authorization
+   - Data validation both client and server side
 
-### Future Security Implementation
-- Proper authentication and authorization system
-- HTTPS enforcement
-- API rate limiting
-- Data encryption
-- CSRF protection
-- XSS prevention
+2. **Input Validation**
+   - Basic form validation implemented
+   - Need server-side validation when API is added
 
-## Integration Points (Future)
+3. **Authentication**
+   - Simulated auth state for POC
+   - Plan for proper JWT or OAuth implementation
 
-### Geolocation Services
-- Integration with mapping APIs for proximity calculations
-- Reverse geocoding for location display
-- Privacy controls for location data
+## External Dependencies
 
-### Authentication Services
-- OAuth providers for social login
-- Email verification services
-- Two-factor authentication
+| Package | Version | Purpose |
+|---------|---------|---------|
+| react | 18.x | Core UI library |
+| react-dom | 18.x | DOM rendering |
+| react-router-dom | 6.x | Routing |
+| tailwindcss | 3.3.5 | Styling |
+| postcss | 8.x | CSS processing |
+| vite | 6.x | Build tool |
 
-### Storage and Media
-- Cloud storage for user-generated content
-- CDN for media delivery
-- Image processing services
+## Deployment Strategy (Post-POC)
 
-### Monitoring and Analytics
-- Error tracking integration
-- Performance monitoring
-- User behavior analytics
-- Conversion tracking
+1. **Build Process**
+   - npm run build
+   - Output to dist/ directory
+   - Static file hosting
 
-## Deployment Strategy
+2. **Environments**
+   - Development
+   - Staging
+   - Production
 
-### POC Deployment
-- Local development using Vite
-- Static site deployment for simple sharing
+3. **Hosting Options**
+   - Netlify
+   - Vercel
+   - AWS S3 + CloudFront
 
-### Future Production Deployment
-- CI/CD pipeline for automated testing and deployment
-- Containerization for consistent environments
-- Serverless functions for backend capabilities
-- Cloud hosting with CDN for global delivery
-- Database for persistent storage
-- Monitoring and logging infrastructure
+## Developer Experience
+
+1. **Local Development**
+   - npm run dev for local server with HMR
+   - Consistent code formatting with editor config
+   - Git workflow with feature branches
+
+2. **Documentation**
+   - Component props documented in JSDoc
+   - Service functions documented with parameters
+   - Memory Bank for high-level documentation
+
+3. **Tooling**
+   - ESLint for code quality
+   - Prettier for formatting
+   - Git hooks for pre-commit checks (recommended)

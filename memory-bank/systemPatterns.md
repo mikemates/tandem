@@ -1,314 +1,171 @@
 # Tandem - System Patterns
 
-## System Architecture
+This document outlines the core architectural patterns, design decisions, and system relationships for the Tandem virtual community platform.
 
-Tandem follows a modern frontend architecture pattern with the following key characteristics:
+## Core Architecture
 
-### Client-Side Architecture
-For the POC, we're implementing a client-side application with:
-
-- **React + Vite**: Frontend framework and build tool combination for rapid development
-- **Local Storage Persistence**: Simulating backend data storage for the POC
-- **Component-Based Structure**: Modular UI components following React best practices
-- **State Management**: React Context API and hooks for state management 
-- **Client-Side Routing**: React Router v6 for navigation between views
-
-### Data Flow
-1. **Unidirectional Data Flow**: Following React patterns for predictable state changes
-2. **Context-Based State Management**: Global state managed via context providers
-3. **Component-Level State**: Local state for UI-specific concerns
-4. **Event-Driven Updates**: Components respond to user interactions and data changes
-5. **Local Persistence**: Data stored in browser localStorage for POC purposes
-
-## Core Design Patterns
-
-### Component Patterns
-
-#### 1. Feature-Based Organization
-Components are organized by feature domain:
-```
-/components
-  /profile      # Profile-related components
-  /matching     # Matching-related components
-  /messaging    # Messaging-related components
-  /community    # Community-related components
-  /common       # Shared UI elements
-```
-
-#### 2. Composition Pattern
-Components are composed from smaller, reusable parts:
-```jsx
-// Example: MatchCard composed of smaller components
-<MatchCard>
-  <ProfilePhoto />
-  <MatchInfo>
-    <MatchScore />
-    <MatchDistance />
-  </MatchInfo>
-  <MatchActions />
-</MatchCard>
-```
-
-#### 3. Container/Presentational Pattern
-Separating data handling from presentation:
-- **Container Components**: Handle data fetching, state management, and logic
-- **Presentational Components**: Focus on rendering UI based on props
-
-#### 4. Provider Pattern
-Using React Context to provide data across the component tree:
-```jsx
-// Example: Authentication Provider
-<AuthProvider>
-  <App />
-</AuthProvider>
-```
-
-### Data Patterns
-
-#### 1. Data Models
-Core data entities that define the application structure:
-
-```typescript
-// User Profile Model
-interface UserProfile {
-  id: string;
-  name: string;
-  location: {
-    lat: number;
-    lng: number;
-    displayName: string;
-  };
-  bio: string;
-  profilePhotoUrl: string;
-  skills: Skill[];
-  interests: string[];
-  seeking: SeekingItem[];
-  verificationStatus: string;
-}
-
-// Skill Model
-interface Skill {
-  category: string;
-  specific: string;
-  proficiency: "beginner" | "intermediate" | "expert";
-  availability: string;
-  description: string;
-}
-
-// Message Model
-interface Message {
-  id: string;
-  conversationId: string;
-  senderId: string;
-  receiverId: string;
-  content: string;
-  timestamp: Date;
-  read: boolean;
-}
-
-// Community Activity Model
-interface CommunityActivity {
-  id: string;
-  type: "event" | "activity" | "need";
-  title: string;
-  description: string;
-  creatorId: string;
-  location: Location;
-  time: {
-    start: Date;
-    end: Date;
-  };
-  relatedSkills: string[];
-  relatedInterests: string[];
-  attendees: string[];
-  distance: number;
-}
-```
-
-#### 2. Service Layer Pattern
-Services handle data operations and external communications:
-```
-/services
-  /auth.js         # Authentication operations
-  /profiles.js     # Profile management
-  /matching.js     # Matching algorithm and operations
-  /messaging.js    # Message handling
-  /community.js    # Community activities
-  /storage.js      # Local storage operations
-```
-
-#### 3. Hook Pattern
-Custom hooks encapsulate reusable logic:
-```jsx
-// Example: useMatching hook
-function useMatching() {
-  const [matches, setMatches] = useState([]);
-  const [loading, setLoading] = useState(false);
-  
-  const fetchMatches = useCallback(async (filters) => {
-    setLoading(true);
-    try {
-      const matchesData = await matchingService.getMatches(filters);
-      setMatches(matchesData);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-  
-  return { matches, loading, fetchMatches };
-}
-```
-
-## Key Implementation Patterns
-
-### Profile System
-- **Progressive Disclosure**: Profile information is collected in stages
-- **Skill/Interest Tagging**: Category-based tagging system for skills and interests
-- **Location Context**: Geographic proximity as a first-class data point
-- **Verification System**: Trust indicators for community safety
-
-### Matching System
-- **Complementary Matching**: Connecting people based on complementary skills/needs
-- **Interest Overlap**: Identifying shared interests for connection quality
-- **Proximity Weighting**: Prioritizing nearby connections
-- **Quality Indicators**: Match scoring based on multiple dimensions
-
-### Community Discovery
-- **Activity Feed**: Time-based stream of community events
-- **Location Filtering**: Geographic filtering of activities
-- **Context-Awareness**: Showing activities related to user interests/skills
-- **Participation Tracking**: Managing user RSVPs and participation
-
-## Component Relationships
+Tandem follows a component-based architecture with service layers for data handling:
 
 ```mermaid
 graph TD
-    App[App] --> Router[React Router]
-    Router --> ProfileFlow[Profile Flow]
-    Router --> MatchingDashboard[Matching Dashboard]
-    Router --> MessagingInterface[Messaging Interface]
-    Router --> CommunityDiscovery[Community Discovery]
-    
-    ProfileFlow --> ProfileForm[Profile Form]
-    ProfileFlow --> SkillsForm[Skills Form]
-    ProfileFlow --> InterestsForm[Interests Form]
-    
-    MatchingDashboard --> MatchFilters[Match Filters]
-    MatchingDashboard --> MatchList[Match List]
-    MatchingDashboard --> MatchDetail[Match Detail]
-    
-    MatchList --> MatchCard[Match Card]
-    MatchCard --> MatchScore[Match Score]
-    
-    MessagingInterface --> ConversationList[Conversation List]
-    MessagingInterface --> MessageThread[Message Thread]
-    MessagingInterface --> MessageComposer[Message Composer]
-    
-    CommunityDiscovery --> ActivityFeed[Activity Feed]
-    CommunityDiscovery --> ActivityDetail[Activity Detail]
-    CommunityDiscovery --> ActivityMap[Activity Map]
-    
-    ActivityFeed --> ActivityCard[Activity Card]
+    A[App] --> B[Pages]
+    B --> C[Components]
+    C --> D[Services]
+    D --> E[Mock Data/LocalStorage]
+    C --> F[UI Elements]
+    B --> G[Routes]
 ```
 
-## State Management
+### Key Implementation Patterns
 
-### Global State
-Managed via React Context:
+1. **Service Layer Pattern**
+   - Implemented for matching, messaging, and profile systems
+   - Separates data handling logic from UI components
+   - Provides centralized data access and manipulation
+   - Enables easier transition to real backend services in the future
 
-```jsx
-// Example AuthContext
-const AuthContext = createContext();
+2. **Component Composition**
+   - UI built from reusable components
+   - Clear component hierarchy with specific responsibilities
+   - Props-based configuration for flexibility
+   - Shared styles via Tailwind CSS utility classes
 
-export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  
-  const login = useCallback((credentials) => {
-    // Login logic
-  }, []);
-  
-  const logout = useCallback(() => {
-    // Logout logic
-  }, []);
-  
-  const value = {
-    user,
-    loading,
-    login,
-    logout
-  };
-  
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
-}
+3. **Page-based Navigation**
+   - React Router for declarative routing
+   - Nested routes for complex views (e.g., match details within matches)
+   - URL parameters for dynamic content (userId, matchId, conversationId)
+   - Consistent layout across pages
+
+4. **State Management**
+   - Local component state with React Hooks
+   - Props for component communication
+   - Services for cross-component data access
+   - Use of useEffect for side effects and data loading
+
+## Feature Patterns
+
+### Profile System
+- **Implementation**: Complete
+- **Pattern**: 
+  - ProfileService for data operations
+  - ProfileView for display
+  - ProfileEditForm for modifications
+  - ProfilePage as container component
+- **Key Features**:
+  - Basic profile information editing
+  - Skills display with proficiency levels
+  - Interests and seeking preferences
+  - Conditional UI based on ownership (current user vs. other users)
+
+### Matching System
+- **Implementation**: Complete
+- **Pattern**:
+  - MatchingService for algorithm and data
+  - MatchList for browsing
+  - MatchCard for previews
+  - MatchDetail for comprehensive view
+- **Key Features**:
+  - Complementary skills matching
+  - Interest-based filtering
+  - Proximity consideration
+  - Match quality indicators
+
+### Messaging System
+- **Implementation**: Complete
+- **Pattern**:
+  - MessagingService for conversations and messages
+  - ConversationList for browsing
+  - MessageThread for interaction
+  - Two-panel responsive layout
+- **Key Features**:
+  - Real-time message composition
+  - Conversation management
+  - Read status tracking
+  - Mobile-responsive design
+
+### Community Discovery System
+- **Implementation**: Planned
+- **Intended Pattern**:
+  - Community service for activities and events
+  - Activity cards for browsing
+  - Activity details for participation
+  - Filtering and search capabilities
+
+## Data Flow
+
+```mermaid
+graph LR
+    User[User] -- Interacts --> UI[UI Components]
+    UI -- Calls --> Service[Service Layer]
+    Service -- Reads/Writes --> Store[Data Store]
+    Service -- Updates --> UI
 ```
 
-### Local State
-Component-specific state using React's useState and useReducer:
+The application follows a unidirectional data flow:
+1. User interacts with UI components
+2. Components call service layer methods
+3. Services perform operations on the data store
+4. Services return results to components
+5. Components update their state and re-render
 
-```jsx
-// Example component with local state
-function MatchFilters({ onFilterChange }) {
-  const [filters, setFilters] = useState({
-    skillsOnly: false,
-    interestsOnly: false,
-    maxDistance: 10
-  });
-  
-  const handleChange = (key, value) => {
-    const newFilters = { ...filters, [key]: value };
-    setFilters(newFilters);
-    onFilterChange(newFilters);
-  };
-  
-  // Component JSX
-}
-```
+## Responsive Design Patterns
 
-## Key Technical Flows
+1. **Mobile-First Approach**
+   - Base styles for mobile devices
+   - Media queries for larger screens
+   - Tailwind's responsive utility classes (sm:, md:, lg:)
 
-### Profile Creation Flow
-1. User enters basic profile information
-2. User selects skill categories 
-3. User provides details for each selected skill
-4. User adds interests and seeking items
-5. Profile is saved and user is redirected to matches
+2. **Adaptive Layouts**
+   - Single-column layouts on mobile
+   - Multi-column layouts on desktop
+   - Hidden/shown elements based on screen size
+   - Flexible sizing with relative units
 
-### Matching Algorithm Flow
-1. Compare user's skills with others' seeking items
-2. Compare user's seeking items with others' skills
-3. Identify overlapping interests
-4. Calculate geographic proximity
-5. Generate match score and sort results
+3. **Touch-Friendly Interactions**
+   - Adequate sizing for touch targets
+   - Clear visual feedback
+   - Simplified interactions on mobile
 
-### Messaging Flow
-1. User initiates conversation from match detail
-2. System creates conversation thread
-3. User composes and sends message
-4. Recipient receives notification
-5. Messages are persisted and displayed in thread view
+## UI Component Patterns
 
-### Community Discovery Flow
-1. System aggregates activities based on location
-2. Activities are filtered by relevance to user
-3. User browses activity feed
-4. User views activity details
-5. User RSVPs to participate
+1. **Cards**
+   - Used for discrete content items (matches, messages, activities)
+   - Consistent padding, borders, and shadows
+   - Clear information hierarchy
 
-## Technical Deployment Strategy
-For the POC:
-- Vite development server for local testing
-- LocalStorage for data persistence
-- Simulated authentication
-- Static location data
+2. **Lists**
+   - Vertical stacking of similar items
+   - Consistent spacing and dividers
+   - Loading and empty states
 
-Future production considerations:
-- Backend API for data persistence
-- Authentication service
-- Real geolocation services
-- WebSocket for real-time messaging
-- CDN for media assets
+3. **Forms**
+   - Labeled inputs with clear validation
+   - Consistent button styling and positioning
+   - Error and success feedback
+   - Responsive layouts
+
+4. **Navigation**
+   - Clear, consistent header
+   - Active state indicators
+   - Mobile-friendly options
+
+## Future Extensibility Considerations
+
+1. **Backend Integration**
+   - Service layer designed for API integration
+   - Consistent data models across features
+   - Clear separation of concerns
+
+2. **Authentication**
+   - Routes prepared for authentication guards
+   - UI conditionally renders based on login state
+   - Profile system ready for user-specific data
+
+3. **Real-time Features**
+   - Messaging system designed for WebSocket integration
+   - UI updates optimistically, ready for confirmation
+
+4. **Geolocation**
+   - Location data structure in place
+   - Matching system considers proximity
+   - Ready for map integration
