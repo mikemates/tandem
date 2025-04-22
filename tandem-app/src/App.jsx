@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { useState } from 'react'
 import './App.css'
+import tandemLogo from './assets/tandemlogo.svg'
 
 // Page components
 import MatchingPage from './pages/matching/MatchingPage'
@@ -20,7 +21,7 @@ function App() {
             <div className="flex justify-between h-16">
               <div className="flex">
                 <div className="flex-shrink-0 flex items-center">
-                  <h1 className="text-xl font-bold text-primary-600">Tandem</h1>
+                  <img src={tandemLogo} alt="Tandem" className="h-8" />
                 </div>
                 {isLoggedIn && (
                   <nav className="ml-6 flex space-x-8">
