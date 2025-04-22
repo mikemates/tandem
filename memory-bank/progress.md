@@ -30,6 +30,7 @@
 - ✅ Profile UI components built (ProfileView, ProfileEditForm)
 - ✅ Community service layer implemented
 - ✅ Community UI components built (ActivityCard, ActivityList, ActivityDetail)
+- ✅ Activity creation form implemented
 - ✅ Git repository initialized and code pushed to GitHub
 - ✅ Project README created with comprehensive documentation
 
@@ -46,7 +47,7 @@
 1. Add additional UI polish
 2. Address any bugs or issues
 3. Add skill and interest management screens
-4. Add activity creation functionality
+4. Add image upload functionality
 
 ## Known Issues & Limitations
 - Placeholder content for Profile and Community pages

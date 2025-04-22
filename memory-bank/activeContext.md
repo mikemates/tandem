@@ -63,9 +63,9 @@ As of April 22, 2025, we have implemented all four core components of the Tandem
 
 ### Immediate Next Steps
 1. Add animations and transitions for visual polish
-2. Create activity creation form and workflow
-3. Refine mobile experience and responsive design
-4. Test all features and fix any issues
+2. Enhance mobile experience and responsive design
+3. Test all features and fix any issues
+4. Add skill and interest management screens
 5. Prepare documentation for future development
 
 ### Post-POC Refinements
@@ -163,9 +163,9 @@ With both matching and messaging systems implemented, we've learned:
 
 ## Next Implementation Focus
 
-1. Create activity creation form and workflow
-2. Add skill and interest management screens
-3. Implement animations for smoother transitions
-4. Add profile photo upload functionality (if time permits)
-5. Enhance error handling and edge cases
+1. Add skill and interest management screens
+2. Implement animations for smoother transitions
+3. Add profile photo upload functionality (if time permits)
+4. Enhance error handling and edge cases
+5. Add more comprehensive form validation
 6. Continue making regular commits to GitHub as features are implemented
