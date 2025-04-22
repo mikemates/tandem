@@ -84,12 +84,14 @@ graph TD
   - Mobile-responsive design
 
 ### Community Discovery System
-- **Implementation**: Planned
-- **Intended Pattern**:
-  - Community service for activities and events
-  - Activity cards for browsing
-  - Activity details for participation
-  - Filtering and search capabilities
+- **Implementation**: Complete
+- **Pattern**:
+  - CommunityService for activities and events
+  - ActivityCard for browsing activities
+  - ActivityList for activity discovery with filtering
+  - ActivityDetail for viewing and participating in activities
+  - ActivityForm for creating new activities
+  - Filtering by category and distance
 
 ## Data Flow
 

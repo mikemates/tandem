@@ -42,7 +42,7 @@ src/
 │   ├── profile/    # Profile components
 │   ├── matching/   # Matching components
 │   ├── messaging/  # Messaging components
-│   └── community/  # Community components (planned)
+│   └── community/  # Community components
 ├── pages/          # Page components that use smaller components
 ├── services/       # Data services and API abstraction
 ├── utils/          # Utility functions
@@ -65,6 +65,7 @@ The application is built with a mobile-first approach using Tailwind CSS's respo
    - ProfileService: Manages user profile data
    - MatchingService: Handles match algorithms and data
    - MessagingService: Manages conversations and messages
+   - CommunityService: Handles activities, filtering, and participation
 
 2. **Component Data Flow**:
    ```
@@ -113,10 +114,11 @@ The application is built with a mobile-first approach using Tailwind CSS's respo
 - Profile system (service, view, edit components)
 - Matching system (algorithm, cards, filtering)
 - Messaging system (conversations, threads, composition)
-- Responsive UI components (layouts, navigation)
+- Community discovery system (activities, filtering, participation, creation)
+- Responsive UI components (layouts, navigation, forms)
 
 ### In Progress
-- Community discovery system (planned next)
+- UI polish and animation enhancements
 
 ### Technical Debt
 
