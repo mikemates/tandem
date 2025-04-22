@@ -31,6 +31,7 @@
 - ✅ Community service layer implemented
 - ✅ Community UI components built (ActivityCard, ActivityList, ActivityDetail)
 - ✅ Activity creation form implemented
+- ✅ Skills and interests management implemented
 - ✅ Git repository initialized and code pushed to GitHub
 - ✅ Project README created with comprehensive documentation
 
@@ -46,8 +47,8 @@
 ### Short-Term (Next Phase)
 1. Add additional UI polish
 2. Address any bugs or issues
-3. Add skill and interest management screens
-4. Add image upload functionality
+3. Add image upload functionality
+4. Enhance form validation and error handling
 
 ## Known Issues & Limitations
 - Placeholder content for Profile and Community pages
