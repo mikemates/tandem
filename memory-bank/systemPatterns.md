@@ -52,11 +52,13 @@ graph TD
   - ProfileEditForm for modifications
   - SkillManager for managing skills
   - InterestManager for managing interests
+  - ProfilePhotoUploader for image upload and management
   - ProfilePage as container component with tab-style navigation
 - **Key Features**:
   - Basic profile information editing
   - Skills management with category, proficiency, and availability
   - Interest management with category filtering
+  - Profile photo uploading with preview and validation
   - Seeking preferences for skills to learn
   - Conditional UI based on ownership (current user vs. other users)
 
