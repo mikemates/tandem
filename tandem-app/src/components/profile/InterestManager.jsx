@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getUserInterests, addUserInterest, removeUserInterest } from '../../services/profileService';
-import { interestCategories, interestTags } from '../../services/mockData';
+import { skillCategories, interestTags } from '../../services/mockData';
 
 /**
  * Component for managing user interests
@@ -47,7 +47,7 @@ const InterestManager = ({ userId }) => {
   // Helper to determine a category for an interest
   const getCategoryForInterest = (interest) => {
     // Find category that might contain this interest
-    for (const category of interestCategories) {
+    for (const category of skillCategories) {
       if (category.skills.some(skill => 
         skill.toLowerCase().includes(interest.toLowerCase()) || 
         interest.toLowerCase().includes(skill.toLowerCase())
@@ -67,7 +67,7 @@ const InterestManager = ({ userId }) => {
     }
     
     return allInterests.filter(interest => {
-      const category = interestCategories.find(cat => cat.name === interest.category);
+      const category = skillCategories.find(cat => cat.name === interest.category);
       return category && category.id === selectedCategory;
     });
   };
@@ -180,7 +180,7 @@ const InterestManager = ({ userId }) => {
             All Categories
           </button>
           
-          {interestCategories.map(category => (
+          {skillCategories.map(category => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
