@@ -292,3 +292,34 @@ export function updateUserLocation(location) {
   
   return { ...currentUser };
 }
+
+/**
+ * Update the user's profile photo
+ * @param {string} userId - The user ID
+ * @param {string} photoDataUrl - The photo data URL (base64 encoded)
+ * @returns {Object} - Updated user profile
+ */
+export function updateProfilePhoto(userId, photoDataUrl) {
+  // Validate inputs
+  if (!userId) {
+    throw new Error('User ID is required');
+  }
+  
+  if (!photoDataUrl || typeof photoDataUrl !== 'string') {
+    throw new Error('Valid photo data is required');
+  }
+  
+  // Only allow updating current user's photo for demo
+  if (userId !== currentUser.id) {
+    throw new Error('Cannot update photo for other users');
+  }
+  
+  // In a real app, we'd upload this to a server and get back a URL
+  // For the demo, we'll just use the data URL directly
+  // (note: in production, you'd never store a full data URL in state)
+  
+  // Update the profile photo URL
+  currentUser.profilePhotoUrl = photoDataUrl;
+  
+  return { ...currentUser };
+}
