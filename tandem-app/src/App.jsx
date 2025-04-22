@@ -5,8 +5,8 @@ import './App.css'
 // Page components
 import MatchingPage from './pages/matching/MatchingPage'
 import MessagingPage from './pages/messaging/MessagingPage'
+import ProfilePage from './pages/profile/ProfilePage'
 // Other pages will be imported as they are created
-// import ProfilePage from './pages/profile/ProfilePage'
 // import CommunityPage from './pages/community/CommunityPage'
 
 function App() {
@@ -81,7 +81,9 @@ function App() {
                 </div>
               </div>
             } />
-            <Route path="/profile" element={<div className="py-12 px-6 bg-white rounded-xl shadow-md">Profile Page (Coming Soon)</div>} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/profile/edit" element={<ProfilePage mode="edit" />} />
+            <Route path="/profile/:userId" element={<ProfilePage />} />
             <Route path="/matches" element={<MatchingPage />} />
             <Route path="/matches/:matchId" element={<MatchingPage />} />
             <Route path="/messages" element={<MessagingPage />} />
