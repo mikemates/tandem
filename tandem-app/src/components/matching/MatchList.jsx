@@ -115,8 +115,13 @@ const MatchList = () => {
           </div>
         ) : (
           <div className="space-y-4">
-            {matches.map(match => (
-              <MatchCard key={match.id} match={match} />
+            {matches.map((match, index) => (
+              <div 
+                key={match.id} 
+                className={`slide-in-right delay-${Math.min(index % 5 + 1, 5)}`}
+              >
+                <MatchCard match={match} />
+              </div>
             ))}
           </div>
         )}

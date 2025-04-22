@@ -83,7 +83,8 @@ const MessageThread = ({ conversationId, otherUser }) => {
             {messages.map(message => (
               <div 
                 key={message.id} 
-                className={`flex ${message.senderId === currentUser.id ? 'justify-end' : 'justify-start'}`}
+                className={`flex ${message.senderId === currentUser.id ? 'justify-end' : 'justify-start'} fade-in`}
+                style={{ animationDelay: `${(messages.indexOf(message) % 10) * 0.1}s` }}
               >
                 <div 
                   className={`max-w-xs md:max-w-md rounded-lg p-3 ${

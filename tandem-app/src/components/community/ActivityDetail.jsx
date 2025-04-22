@@ -108,7 +108,7 @@ const ActivityDetail = ({ activity }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden">
+    <div className="bg-white rounded-xl shadow-md overflow-hidden scale-in">
       {/* Activity header */}
       <div className="relative">
         <div className="h-32 bg-gradient-to-r from-primary-600 to-primary-400"></div>
