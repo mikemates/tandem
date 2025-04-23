@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom'
 import { useState } from 'react'
 import './App.css'
 import tandemLogo from './assets/tandemlogo.svg'
@@ -8,6 +8,7 @@ import MatchingPage from './pages/matching/MatchingPage'
 import MessagingPage from './pages/messaging/MessagingPage'
 import ProfilePage from './pages/profile/ProfilePage'
 import CommunityPage from './pages/community/CommunityPage'
+import DashboardPage from './pages/dashboard/DashboardPage'
 
 function App() {
   // This will be replaced with proper auth context later
@@ -21,7 +22,9 @@ function App() {
             <div className="flex justify-between h-16">
               <div className="flex">
                 <div className="flex-shrink-0 flex items-center">
-                  <img src={tandemLogo} alt="Tandem" className="h-6" />
+                  <Link to="/dashboard">
+                    <img src={tandemLogo} alt="Tandem" className="h-6" />
+                  </Link>
                 </div>
                 {isLoggedIn && (
                   <nav className="ml-6 flex space-x-8">
@@ -64,23 +67,28 @@ function App() {
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <Routes>
             <Route path="/" element={
-              <div className="text-center">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                  Find your people. Build your place.
-                </h2>
-                <p className="text-xl text-gray-600 mb-8">
-                  Connect with people based on complementary skills, shared interests, and proximity.
-                </p>
-                <div className="flex justify-center">
-                  <Link to="/matches" className="btn btn-primary mr-4">
-                    Find Matches
-                  </Link>
-                  <Link to="/community" className="btn btn-secondary">
-                    Discover Community
-                  </Link>
+              isLoggedIn ? (
+                <Navigate to="/dashboard" replace />
+              ) : (
+                <div className="text-center">
+                  <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                    Find your people. Build your place.
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Connect with people based on complementary skills, shared interests, and proximity.
+                  </p>
+                  <div className="flex justify-center">
+                    <Link to="/matches" className="btn btn-primary mr-4">
+                      Find Matches
+                    </Link>
+                    <Link to="/community" className="btn btn-secondary">
+                      Discover Community
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              )
             } />
+            <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/profile/edit" element={<ProfilePage mode="edit" />} />
             <Route path="/profile/skills" element={<ProfilePage mode="skills" />} />
