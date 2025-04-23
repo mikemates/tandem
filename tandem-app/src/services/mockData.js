@@ -37,7 +37,7 @@ export const mockUsers = [
     ],
     verificationStatus: "verified",
     distance: 0.8,
-    matchScore: 74
+    matchScore: 95
   },
   {
     id: "7",
@@ -67,7 +67,7 @@ export const mockUsers = [
     ],
     verificationStatus: "verified",
     distance: 1.1,
-    matchScore: 82
+    matchScore: 88
   },
   {
     id: "8",
@@ -129,7 +129,7 @@ export const mockUsers = [
     seeking: [],
     verificationStatus: "verified",
     distance: 1.2,
-    matchScore: 92
+    matchScore: 97
   },
   {
     id: "2",
@@ -154,7 +154,7 @@ export const mockUsers = [
     seeking: [],
     verificationStatus: "verified",
     distance: 0.5,
-    matchScore: 84
+    matchScore: 93
   },
   {
     id: "3",
@@ -221,7 +221,7 @@ export const mockUsers = [
     ],
     verificationStatus: "verified",
     distance: 1.8,
-    matchScore: 88
+    matchScore: 90
   },
   {
     id: "5",
