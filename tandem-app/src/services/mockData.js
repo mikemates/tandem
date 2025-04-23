@@ -3,6 +3,110 @@
 
 export const mockUsers = [
   {
+    id: "6",
+    name: "Sophia Rodriguez",
+    location: {
+      lat: 47.6150,
+      lng: -122.3400,
+      displayName: "Seattle, WA"
+    },
+    bio: "Yoga instructor and wellness advocate who believes in the power of mindfulness and movement. Looking to connect with others interested in holistic health.",
+    profilePhotoUrl: "https://randomuser.me/api/portraits/women/68.jpg",
+    skills: [
+      {
+        category: "Wellness",
+        specific: "Yoga",
+        proficiency: "expert",
+        availability: "Mornings, Weekends",
+        description: "Teaching yoga for 5+ years, specializing in vinyasa flow and restorative practices."
+      },
+      {
+        category: "Wellness",
+        specific: "Meditation",
+        proficiency: "intermediate",
+        availability: "Flexible",
+        description: "Guided meditation and mindfulness practices for stress reduction."
+      }
+    ],
+    interests: ["Fitness", "Nutrition", "Outdoor Activities", "Reading"],
+    seeking: [
+      {
+        skill: "Cooking",
+        experienceLevel: "Intermediate"
+      }
+    ],
+    verificationStatus: "verified",
+    distance: 0.8,
+    matchScore: 74
+  },
+  {
+    id: "7",
+    name: "Daniel Chen",
+    location: {
+      lat: 47.6160,
+      lng: -122.3220,
+      displayName: "Seattle, WA"
+    },
+    bio: "UI/UX designer with a passion for creating intuitive, accessible digital experiences. Love sharing knowledge about design principles and user research.",
+    profilePhotoUrl: "https://randomuser.me/api/portraits/men/55.jpg",
+    skills: [
+      {
+        category: "Tech",
+        specific: "UI/UX Design",
+        proficiency: "expert",
+        availability: "Evenings, Weekends",
+        description: "From user research to high-fidelity prototypes, I can teach all aspects of the UX process."
+      }
+    ],
+    interests: ["Design", "Art", "Technology", "Coffee"],
+    seeking: [
+      {
+        skill: "Web Development",
+        experienceLevel: "Intermediate"
+      }
+    ],
+    verificationStatus: "verified",
+    distance: 1.1,
+    matchScore: 82
+  },
+  {
+    id: "8",
+    name: "Emma Wilson",
+    location: {
+      lat: 47.6145,
+      lng: -122.3255,
+      displayName: "Seattle, WA"
+    },
+    bio: "Language teacher and polyglot (fluent in Spanish, French, and Japanese). Passionate about language exchange and cultural learning.",
+    profilePhotoUrl: "https://randomuser.me/api/portraits/women/29.jpg",
+    skills: [
+      {
+        category: "Languages",
+        specific: "Spanish",
+        proficiency: "expert",
+        availability: "Weekday Evenings",
+        description: "Conversational Spanish with focus on practical vocabulary and pronunciation."
+      },
+      {
+        category: "Languages",
+        specific: "French",
+        proficiency: "expert",
+        availability: "Weekends",
+        description: "French language instruction for beginners through advanced learners."
+      }
+    ],
+    interests: ["Travel", "Literature", "Cooking", "Film"],
+    seeking: [
+      {
+        skill: "Photography",
+        experienceLevel: "Beginner"
+      }
+    ],
+    verificationStatus: "verified",
+    distance: 1.5,
+    matchScore: 65
+  },
+  {
     id: "1",
     name: "Alex Rivera",
     location: {
@@ -207,6 +311,69 @@ export const mockMessages = [
     content: "That sounds perfect! This Saturday afternoon works for me. What should I bring?",
     timestamp: "2025-04-22T10:20:00Z",
     read: true
+  },
+  {
+    id: "msg4",
+    conversationId: "conv1",
+    senderId: "1",
+    receiverId: "user123",
+    content: "Just bring whatever camera you have - even a smartphone is fine for basics! And maybe a notebook to jot down some tips. Looking forward to it!",
+    timestamp: "2025-04-22T10:25:00Z",
+    read: false
+  },
+  {
+    id: "msg5",
+    conversationId: "conv2",
+    senderId: "user123",
+    receiverId: "2",
+    content: "Hey Jamie! I'm new to the area and saw you're into board games. Any recommendations for someone just getting into the hobby?",
+    timestamp: "2025-04-22T14:30:00Z",
+    read: true
+  },
+  {
+    id: "msg6",
+    conversationId: "conv2",
+    senderId: "2",
+    receiverId: "user123",
+    content: "Welcome to Seattle, Eli! For beginners, I'd recommend Ticket to Ride, Catan, or Pandemic. I host a game night every other Friday if you'd like to join!",
+    timestamp: "2025-04-22T15:45:00Z",
+    read: true
+  },
+  {
+    id: "msg7",
+    conversationId: "conv2",
+    senderId: "user123",
+    receiverId: "2",
+    content: "That sounds great! I'd love to join the next game night. When is it?",
+    timestamp: "2025-04-22T16:20:00Z",
+    read: true
+  },
+  {
+    id: "msg8",
+    conversationId: "conv2",
+    senderId: "2",
+    receiverId: "user123",
+    content: "Next one is on Friday the 26th at 7pm at Meeples Games. I'll add you to the list. It's a friendly group, don't worry about being new!",
+    timestamp: "2025-04-22T17:05:00Z",
+    read: false
+  },
+  {
+    id: "msg9",
+    conversationId: "conv3",
+    senderId: "user123",
+    receiverId: "3",
+    content: "Hi Chris! I'm learning guitar and saw you're a pianist looking for jam partners. Would you be open to jamming with a beginner?",
+    timestamp: "2025-04-23T09:10:00Z",
+    read: true
+  },
+  {
+    id: "msg10",
+    conversationId: "conv3",
+    senderId: "3",
+    receiverId: "user123",
+    content: "Hey Eli! Absolutely, I love playing with musicians of all levels. We could meet up at Volunteer Park sometime. What kind of music do you like?",
+    timestamp: "2025-04-23T09:45:00Z",
+    read: false
   }
 ];
 
@@ -214,13 +381,126 @@ export const mockConversations = [
   {
     id: "conv1",
     participants: ["user123", "1"],
-    lastMessage: "That sounds perfect! This Saturday afternoon works for me. What should I bring?",
-    lastMessageTimestamp: "2025-04-22T10:20:00Z",
-    unreadCount: 0
+    lastMessage: "Just bring whatever camera you have - even a smartphone is fine for basics! And maybe a notebook to jot down some tips. Looking forward to it!",
+    lastMessageTimestamp: "2025-04-22T10:25:00Z",
+    unreadCount: 1
+  },
+  {
+    id: "conv2",
+    participants: ["user123", "2"],
+    lastMessage: "Next one is on Friday the 26th at 7pm at Meeples Games. I'll add you to the list. It's a friendly group, don't worry about being new!",
+    lastMessageTimestamp: "2025-04-22T17:05:00Z",
+    unreadCount: 1
+  },
+  {
+    id: "conv3",
+    participants: ["user123", "3"],
+    lastMessage: "Hey Eli! Absolutely, I love playing with musicians of all levels. We could meet up at Volunteer Park sometime. What kind of music do you like?",
+    lastMessageTimestamp: "2025-04-23T09:45:00Z",
+    unreadCount: 1
   }
 ];
 
 export const mockActivities = [
+  {
+    id: "act6",
+    title: "Language Exchange Meetup",
+    description: "Practice conversational Spanish and French in a casual setting. All levels welcome! We'll split into small groups based on proficiency levels.",
+    date: "2025-04-30T18:30:00Z",
+    endDate: "2025-04-30T20:30:00Z",
+    category: "Languages",
+    location: {
+      lat: 47.6145,
+      lng: -122.3255,
+      displayName: "Café Allegro"
+    },
+    hostId: "8",
+    hostName: "Emma Wilson",
+    hostPhotoUrl: "https://randomuser.me/api/portraits/women/29.jpg",
+    createdAt: "2025-04-22T16:45:00Z",
+    maxParticipants: 20,
+    skillsInvolved: ["Spanish", "French"],
+    participants: [
+      {
+        userId: "8",
+        name: "Emma Wilson",
+        profilePhotoUrl: "https://randomuser.me/api/portraits/women/29.jpg",
+        joinedDate: "2025-04-22T16:45:00Z"
+      },
+      {
+        userId: "7",
+        name: "Daniel Chen",
+        profilePhotoUrl: "https://randomuser.me/api/portraits/men/55.jpg",
+        joinedDate: "2025-04-22T18:15:00Z"
+      }
+    ]
+  },
+  {
+    id: "act7",
+    title: "Morning Yoga in the Park",
+    description: "Start your day with an energizing yoga session suitable for all levels. We'll focus on gentle flows and mindful movement. Bring your own mat!",
+    date: "2025-05-01T08:00:00Z",
+    endDate: "2025-05-01T09:00:00Z",
+    category: "Wellness",
+    location: {
+      lat: 47.6156,
+      lng: -122.3301,
+      displayName: "Cal Anderson Park"
+    },
+    hostId: "6",
+    hostName: "Sophia Rodriguez",
+    hostPhotoUrl: "https://randomuser.me/api/portraits/women/68.jpg",
+    createdAt: "2025-04-23T07:30:00Z",
+    maxParticipants: 15,
+    skillsInvolved: ["Yoga", "Meditation"],
+    participants: [
+      {
+        userId: "6",
+        name: "Sophia Rodriguez",
+        profilePhotoUrl: "https://randomuser.me/api/portraits/women/68.jpg",
+        joinedDate: "2025-04-23T07:30:00Z"
+      }
+    ]
+  },
+  {
+    id: "act8",
+    title: "UI/UX Design Workshop: Mobile Interfaces",
+    description: "Hands-on workshop exploring best practices for designing intuitive mobile interfaces. We'll work through real-world examples and critique sessions.",
+    date: "2025-05-02T17:00:00Z",
+    endDate: "2025-05-02T19:30:00Z",
+    category: "Tech",
+    location: {
+      lat: 47.6080,
+      lng: -122.3351,
+      displayName: "Seattle Central Library, Meeting Room 3"
+    },
+    hostId: "7",
+    hostName: "Daniel Chen",
+    hostPhotoUrl: "https://randomuser.me/api/portraits/men/55.jpg",
+    createdAt: "2025-04-21T14:00:00Z",
+    maxParticipants: 12,
+    skillsInvolved: ["UI/UX Design", "Mobile Apps"],
+    participants: [
+      {
+        userId: "7",
+        name: "Daniel Chen",
+        profilePhotoUrl: "https://randomuser.me/api/portraits/men/55.jpg",
+        joinedDate: "2025-04-21T14:00:00Z"
+      },
+      {
+        userId: "4",
+        name: "Maya Patel",
+        profilePhotoUrl: "https://randomuser.me/api/portraits/women/33.jpg",
+        joinedDate: "2025-04-22T09:15:00Z"
+      },
+      {
+        userId: "user123",
+        name: "Eli Parker",
+        profilePhotoUrl: "https://randomuser.me/api/portraits/men/42.jpg",
+        joinedDate: "2025-04-23T08:30:00Z"
+      }
+    ]
+  },
   {
     id: "act1",
     title: "Neighborhood Photography Walk",
