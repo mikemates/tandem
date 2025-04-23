@@ -223,103 +223,144 @@ export const mockConversations = [
 export const mockActivities = [
   {
     id: "act1",
-    type: "event",
     title: "Neighborhood Photography Walk",
     description: "Join fellow photography enthusiasts for a casual walk around Green Lake. All skill levels welcome! Bring your camera or smartphone.",
-    creatorId: "1",
+    date: "2025-04-27T14:00:00Z",
+    endDate: "2025-04-27T16:00:00Z",
+    category: "Photography",
     location: {
       lat: 47.6806,
       lng: -122.3353,
       displayName: "Green Lake Park, North Entrance"
     },
-    time: {
-      start: "2025-04-27T14:00:00Z",
-      end: "2025-04-27T16:00:00Z"
-    },
-    relatedSkills: ["Photography"],
-    relatedInterests: ["Hiking", "Photography"],
-    attendees: ["1", "user123"],
-    distance: 0.7
+    hostId: "1",
+    hostName: "Alex Rivera",
+    hostPhotoUrl: "https://randomuser.me/api/portraits/men/32.jpg",
+    createdAt: "2025-04-20T10:30:00Z",
+    maxParticipants: 15,
+    skillsInvolved: ["Photography"],
+    participants: [
+      {
+        userId: "1",
+        name: "Alex Rivera",
+        profilePhotoUrl: "https://randomuser.me/api/portraits/men/32.jpg",
+        joinedDate: "2025-04-20T10:30:00Z"
+      },
+      {
+        userId: "user123",
+        name: "Eli Parker",
+        profilePhotoUrl: "https://randomuser.me/api/portraits/men/42.jpg",
+        joinedDate: "2025-04-21T15:45:00Z"
+      }
+    ]
   },
   {
     id: "act2",
-    type: "event",
     title: "Board Game Café Meetup",
     description: "Join us at Meeples Games for an evening of board games. Beginners welcome!",
-    creatorId: "2",
+    date: "2025-04-25T18:00:00Z",
+    endDate: "2025-04-25T21:00:00Z",
+    category: "Games",
     location: {
       lat: 47.5869,
       lng: -122.3363,
       displayName: "Meeples Games"
     },
-    time: {
-      start: "2025-04-22T18:00:00Z",
-      end: "2025-04-22T21:00:00Z"
-    },
-    relatedSkills: [],
-    relatedInterests: ["Board Games"],
-    attendees: ["2"],
-    distance: 1.2
+    hostId: "2",
+    hostName: "Jamie Kim",
+    hostPhotoUrl: "https://randomuser.me/api/portraits/women/44.jpg",
+    createdAt: "2025-04-18T12:15:00Z",
+    maxParticipants: 8,
+    skillsInvolved: ["Board Games"],
+    participants: [
+      {
+        userId: "2",
+        name: "Jamie Kim",
+        profilePhotoUrl: "https://randomuser.me/api/portraits/women/44.jpg",
+        joinedDate: "2025-04-18T12:15:00Z"
+      }
+    ]
   },
   {
     id: "act3",
-    type: "event",
     title: "Guitar Jam Session",
     description: "Casual jam session for guitar players of all skill levels. Bring your own instrument!",
-    creatorId: "3",
+    date: "2025-04-28T15:00:00Z",
+    endDate: "2025-04-28T17:00:00Z",
+    category: "Music",
     location: {
       lat: 47.6239,
       lng: -122.3553,
       displayName: "Volunteer Park"
     },
-    time: {
-      start: "2025-04-28T15:00:00Z",
-      end: "2025-04-28T17:00:00Z"
-    },
-    relatedSkills: ["Guitar", "Music"],
-    relatedInterests: ["Music"],
-    attendees: ["3"],
-    distance: 1.5
+    hostId: "3",
+    hostName: "Chris Morgan",
+    hostPhotoUrl: "https://randomuser.me/api/portraits/men/67.jpg",
+    createdAt: "2025-04-19T09:20:00Z",
+    maxParticipants: 10,
+    skillsInvolved: ["Guitar", "Music"],
+    participants: [
+      {
+        userId: "3",
+        name: "Chris Morgan",
+        profilePhotoUrl: "https://randomuser.me/api/portraits/men/67.jpg",
+        joinedDate: "2025-04-19T09:20:00Z"
+      }
+    ]
   },
   {
     id: "act4",
-    type: "event",
     title: "Urban Gardening Workshop",
     description: "Learn how to grow vegetables in small urban spaces. Seeds and starter plants provided!",
-    creatorId: "5",
+    date: "2025-04-29T10:00:00Z",
+    endDate: "2025-04-29T12:00:00Z",
+    category: "Outdoors",
     location: {
       lat: 47.5912,
       lng: -122.3320,
       displayName: "Community Garden Center"
     },
-    time: {
-      start: "2025-04-29T10:00:00Z",
-      end: "2025-04-29T12:00:00Z"
-    },
-    relatedSkills: ["Urban Gardening"],
-    relatedInterests: ["Gardening", "Sustainability"],
-    attendees: ["5"],
-    distance: 0.8
+    hostId: "5",
+    hostName: "Jordan Taylor",
+    hostPhotoUrl: "https://randomuser.me/api/portraits/men/22.jpg",
+    createdAt: "2025-04-22T08:45:00Z",
+    maxParticipants: 12,
+    skillsInvolved: ["Urban Gardening"],
+    participants: [
+      {
+        userId: "5",
+        name: "Jordan Taylor",
+        profilePhotoUrl: "https://randomuser.me/api/portraits/men/22.jpg",
+        joinedDate: "2025-04-22T08:45:00Z"
+      }
+    ]
   },
   {
     id: "act5",
-    type: "event",
     title: "Web Development Study Group",
     description: "Weekly study group for web development. This week's topic: React Hooks and Context API.",
-    creatorId: "4",
+    date: "2025-04-24T18:00:00Z",
+    endDate: "2025-04-24T20:00:00Z",
+    category: "Tech",
     location: {
       lat: 47.6142,
       lng: -122.3241,
       displayName: "Seattle Public Library, Central Branch"
     },
-    time: {
-      start: "2025-04-24T18:00:00Z",
-      end: "2025-04-24T20:00:00Z"
-    },
-    relatedSkills: ["Web Development"],
-    relatedInterests: ["Coding"],
-    attendees: ["4"],
-    distance: 1.8
+    hostId: "4",
+    hostName: "Maya Patel",
+    hostPhotoUrl: "https://randomuser.me/api/portraits/women/33.jpg",
+    createdAt: "2025-04-17T14:30:00Z",
+    maxParticipants: 15,
+    skillsInvolved: ["Web Development", "React"],
+    participants: [
+      {
+        userId: "4",
+        name: "Maya Patel",
+        profilePhotoUrl: "https://randomuser.me/api/portraits/women/33.jpg",
+        joinedDate: "2025-04-17T14:30:00Z"
+      }
+    ]
   }
 ];
 

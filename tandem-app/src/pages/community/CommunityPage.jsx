@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import ActivityList from '../../components/community/ActivityList';
 import ActivityDetail from '../../components/community/ActivityDetail';
+import ActivityForm from '../../components/community/ActivityForm';
 import { getActivityById } from '../../services/communityService';
 
 /**
  * Page component for community activities
- * Shows either a list of activities or a detailed view of a single activity
+ * Shows either a list of activities, a detailed view of a single activity,
+ * or the form to create a new activity
  */
-const CommunityPage = () => {
+const CommunityPage = ({ mode = 'list' }) => {
+  const navigate = useNavigate();
   const { activityId } = useParams();
   const [activity, setActivity] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -66,13 +69,21 @@ const CommunityPage = () => {
   
   return (
     <div>
-      {/* Page title */}
-      {!activityId && (
-        <h1 className="text-2xl font-bold mb-6">Community Activities</h1>
+      {/* Page title with create button */}
+      {!activityId && mode !== 'create' && (
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl font-bold">Community Activities</h1>
+          
+          <Link to="/community/create" className="btn btn-primary">
+            Create Activity
+          </Link>
+        </div>
       )}
       
-      {/* Show either activity detail or activity list */}
-      {activityId && activity ? (
+      {/* Show appropriate component based on mode and params */}
+      {mode === 'create' ? (
+        <ActivityForm />
+      ) : activityId && activity ? (
         <ActivityDetail activity={activity} />
       ) : (
         <ActivityList filters={defaultFilters} />
