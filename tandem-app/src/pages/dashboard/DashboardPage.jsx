@@ -76,16 +76,16 @@ const DashboardPage = () => {
   }).sort((a, b) => new Date(a.date) - new Date(b.date));
   
   return (
-    <div className="space-y-8">
-      <h1 className="text-2xl font-bold text-primary-600">Your Connection Hub</h1>
+    <div className="space-y-6 sm:space-y-8">
+      <h1 className="text-xl sm:text-2xl font-bold text-primary-600 px-1">Your Connection Hub</h1>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {/* Personal Snapshot */}
         <div className="bg-white rounded-xl shadow-md overflow-hidden">
-          <div className="px-6 py-5 border-b border-gray-200 bg-gray-50">
-            <h2 className="text-lg font-medium text-gray-900">Personal Snapshot</h2>
+          <div className="px-4 sm:px-6 py-3 sm:py-5 border-b border-gray-200 bg-gray-50">
+            <h2 className="text-base sm:text-lg font-medium text-gray-900">Personal Snapshot</h2>
           </div>
-          <div className="px-6 py-5">
+          <div className="px-4 sm:px-6 py-4 sm:py-5">
             <div className="flex items-center mb-4">
               <div className="w-full mr-4">
                 <div className="flex justify-between mb-1">
@@ -101,7 +101,7 @@ const DashboardPage = () => {
               </div>
             </div>
             
-            <div className="grid grid-cols-2 gap-4 text-center">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 text-center">
               <div className="bg-gray-50 rounded-lg p-3">
                 <p className="text-2xl font-bold text-primary-600">{profile.skills?.length || 0}</p>
                 <p className="text-xs text-gray-500">Skills Shared</p>
@@ -132,10 +132,10 @@ const DashboardPage = () => {
         
         {/* Local Activity Pulse */}
         <div className="bg-white rounded-xl shadow-md overflow-hidden">
-          <div className="px-6 py-5 border-b border-gray-200 bg-gray-50">
-            <h2 className="text-lg font-medium text-gray-900">Local Activity Pulse</h2>
+          <div className="px-4 sm:px-6 py-3 sm:py-5 border-b border-gray-200 bg-gray-50">
+            <h2 className="text-base sm:text-lg font-medium text-gray-900">Local Activity Pulse</h2>
           </div>
-          <div className="px-6 py-5">
+          <div className="px-4 sm:px-6 py-4 sm:py-5">
             <h3 className="font-medium text-gray-900 mb-2">Today in Your Area</h3>
             <div className="space-y-3">
               {activities.length > 0 ? (
@@ -165,10 +165,10 @@ const DashboardPage = () => {
         
         {/* New Matches */}
         <div className="bg-white rounded-xl shadow-md overflow-hidden">
-          <div className="px-6 py-5 border-b border-gray-200 bg-gray-50">
-            <h2 className="text-lg font-medium text-gray-900">New Matches</h2>
+          <div className="px-4 sm:px-6 py-3 sm:py-5 border-b border-gray-200 bg-gray-50">
+            <h2 className="text-base sm:text-lg font-medium text-gray-900">New Matches</h2>
           </div>
-          <div className="px-6 py-5">
+          <div className="px-4 sm:px-6 py-4 sm:py-5">
             {matches.length > 0 ? (
               <div className="space-y-4">
                 {matches.slice(0, 3).map(match => (
@@ -179,8 +179,8 @@ const DashboardPage = () => {
                       className="h-12 w-12 rounded-full object-cover"
                     />
                     <div className="ml-4 flex-grow">
-                      <p className="text-sm font-medium text-gray-900">{match.name}</p>
-                      <p className="text-xs text-gray-500">{match.skills[0]?.specific || 'No skills listed'}</p>
+                      <p className="text-sm font-medium text-gray-900 truncate">{match.name}</p>
+                      <p className="text-xs text-gray-500 truncate">{match.skills[0]?.specific || 'No skills listed'}</p>
                     </div>
                     <span className="match-score bg-accent">{match.matchScore}%</span>
                   </div>
@@ -203,26 +203,26 @@ const DashboardPage = () => {
         
         {/* Quick Actions */}
         <div className="bg-white rounded-xl shadow-md overflow-hidden">
-          <div className="px-6 py-5 border-b border-gray-200 bg-gray-50">
-            <h2 className="text-lg font-medium text-gray-900">Quick Actions</h2>
+          <div className="px-4 sm:px-6 py-3 sm:py-5 border-b border-gray-200 bg-gray-50">
+            <h2 className="text-base sm:text-lg font-medium text-gray-900">Quick Actions</h2>
           </div>
-          <div className="px-6 py-5">
-            <div className="grid grid-cols-2 gap-4">
+          <div className="px-4 sm:px-6 py-4 sm:py-5">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <Link to="/matches" className="bg-primary-600 text-white rounded-lg p-4 text-center hover:bg-primary-700 transition">
-                <span className="block text-lg font-medium">Find Match</span>
-                <span className="text-xs">Discover people</span>
+                <span className="block text-base sm:text-lg font-medium">Find Match</span>
+                <span className="text-xs sm:text-xs">Discover people</span>
               </Link>
               <Link to="/community" className="bg-primary-600 text-white rounded-lg p-4 text-center hover:bg-primary-700 transition">
-                <span className="block text-lg font-medium">Join</span>
-                <span className="text-xs">Local activities</span>
+                <span className="block text-base sm:text-lg font-medium">Join</span>
+                <span className="text-xs sm:text-xs">Local activities</span>
               </Link>
               <Link to="/messages" className="bg-accent text-white rounded-lg p-4 text-center hover:bg-accent transition">
-                <span className="block text-lg font-medium">Message</span>
-                <span className="text-xs">Start conversations</span>
+                <span className="block text-base sm:text-lg font-medium">Message</span>
+                <span className="text-xs sm:text-xs">Start conversations</span>
               </Link>
               <Link to="/community/create" className="bg-accent text-white rounded-lg p-4 text-center hover:bg-accent transition">
-                <span className="block text-lg font-medium">Create</span>
-                <span className="text-xs">Host an activity</span>
+                <span className="block text-base sm:text-lg font-medium">Create</span>
+                <span className="text-xs sm:text-xs">Host an activity</span>
               </Link>
             </div>
           </div>
@@ -230,10 +230,10 @@ const DashboardPage = () => {
         
         {/* Conversations */}
         <div className="bg-white rounded-xl shadow-md overflow-hidden">
-          <div className="px-6 py-5 border-b border-gray-200 bg-gray-50">
-            <h2 className="text-lg font-medium text-gray-900">Recent Conversations</h2>
+          <div className="px-4 sm:px-6 py-3 sm:py-5 border-b border-gray-200 bg-gray-50">
+            <h2 className="text-base sm:text-lg font-medium text-gray-900">Recent Conversations</h2>
           </div>
-          <div className="px-6 py-5">
+          <div className="px-4 sm:px-6 py-4 sm:py-5">
             {conversations.length > 0 ? (
               <div className="space-y-4">
                 {conversations.map(conversation => {
@@ -250,7 +250,7 @@ const DashboardPage = () => {
                           className="h-10 w-10 rounded-full object-cover"
                         />
                         <div className="ml-3 flex-grow">
-                          <p className="text-sm font-medium text-gray-900">{otherParticipant?.name || 'Unknown User'}</p>
+                          <p className="text-sm font-medium text-gray-900 truncate max-w-[120px] sm:max-w-none">{otherParticipant?.name || 'Unknown User'}</p>
                           <p className="text-xs text-gray-500">
                             {new Date(conversation.lastMessageTimestamp).toLocaleDateString()}
                           </p>
@@ -261,7 +261,7 @@ const DashboardPage = () => {
                           </span>
                         )}
                       </div>
-                      <p className="text-sm text-gray-600 truncate">{conversation.lastMessage}</p>
+                      <p className="text-sm text-gray-600 truncate max-w-full">{conversation.lastMessage}</p>
                     </div>
                   );
                 })}
@@ -283,21 +283,21 @@ const DashboardPage = () => {
         
         {/* Upcoming Events */}
         <div className="bg-white rounded-xl shadow-md overflow-hidden">
-          <div className="px-6 py-5 border-b border-gray-200 bg-gray-50">
-            <h2 className="text-lg font-medium text-gray-900">Upcoming Events</h2>
+          <div className="px-4 sm:px-6 py-3 sm:py-5 border-b border-gray-200 bg-gray-50">
+            <h2 className="text-base sm:text-lg font-medium text-gray-900">Upcoming Events</h2>
           </div>
-          <div className="px-6 py-5">
+          <div className="px-4 sm:px-6 py-4 sm:py-5">
             {upcomingActivities.length > 0 ? (
               <div className="space-y-4">
                 {upcomingActivities.slice(0, 3).map(activity => (
                   <div key={activity.id} className="border-b border-gray-100 pb-4 last:border-0 last:pb-0">
                     <div className="flex">
-                      <div className="flex-shrink-0 rounded-lg bg-primary-100 text-primary-800 p-2 text-center w-14">
+                      <div className="flex-shrink-0 rounded-lg bg-primary-100 text-primary-800 p-2 text-center w-12 sm:w-14">
                         <span className="block text-sm">{new Date(activity.date).toLocaleDateString([], { month: 'short' })}</span>
                         <span className="block text-lg font-bold">{new Date(activity.date).getDate()}</span>
                       </div>
                       <div className="ml-4">
-                        <p className="text-sm font-medium text-gray-900">{activity.title}</p>
+                        <p className="text-sm font-medium text-gray-900 truncate">{activity.title}</p>
                         <p className="text-xs text-gray-500">
                           {new Date(activity.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} • {activity.location.displayName}
                         </p>
